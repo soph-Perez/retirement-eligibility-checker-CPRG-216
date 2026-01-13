@@ -1,6 +1,9 @@
-NOT_ELIGIBLE = 0
-FULL_BENEFITS = 1
-DISCOUNTED_BENEFITS = 2
+from enum import Enum
+
+class Eligibility(Enum): #prevents illegal states
+  NOT_ELIGIBLE = 0
+  FULL_BENEFITS = 1
+  DISCOUNTED_BENEFITS = 2
 
 def age_validity():
   while True:
@@ -24,16 +27,16 @@ def year_validity():
 
 def eligibility(age, year):
   if age < 50:
-    return NOT_ELIGIBLE
+    return Eligibility.NOT_ELIGIBLE
   elif age >= 65 or age + year >= 80:
-    return FULL_BENEFITS
+    return Eligibility.FULL_BENEFITS
   else:
-    return DISCOUNTED_BENEFITS
+    return Eligibility.DISCOUNTED_BENEFITS
 
 def display_result(result):
-  if result == NOT_ELIGIBLE:
+  if result == Eligibility.NOT_ELIGIBLE:
     print("You are not eligible for retirement\n")
-  elif result == FULL_BENEFITS:
+  elif result == Eligibility.FULL_BENEFITS:
     print("You are eligible for retirement with full pension benefits\n")
   else:
     print("You are eligible for retirement with discounted pension benefits\n")
